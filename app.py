@@ -15,20 +15,23 @@ def main():
             # Call your news classifier function
             result_dict, highest_prob = classify_news(user_input)
 
-            # Display the result
-            st.success(f"Predicted category: {highest_prob}")
-
             # Display probabilities for all categories
             st.write("Prediction Probabilities:")
             for category, probability in result_dict.items():
+
+                # Display category and probability
                 st.write(f"{category}: {probability}")
+                # Convert probability to a percentage
+                percentage = float(probability[:-1])  # Remove the '%' and convert to float
+                # Display progress bar
+                st.progress(percentage / 100.0)
+
+
+            # Display the highest predicted category
+            st.success(f"Predicted category: {highest_prob}")
+
         else:
             st.warning("Please enter some text.")
-
-if __name__ == "__main__":
-    main()
-
-
 
 if __name__ == "__main__":
     main()
