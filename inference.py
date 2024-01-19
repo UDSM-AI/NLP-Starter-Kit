@@ -1,5 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras.preprocessing.text import tokenizer_from_json
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 
 import re
@@ -10,9 +11,11 @@ import json
 encoder = joblib.load('encoder/encoder.joblib')
 
 # load tokenizer
-with open('tokenizer/tokenizer.json') as f:
-    data = json.load(f)
-    tokenizer = tokenizer_from_json(f)
+with open('tokenizer/tf_tokenizer.json', 'r') as f:
+    tokenizer_json = json.load(f)
+
+tokenizer = tokenizer_from_json(tokenizer_json)
+
 
 # load model
 model = tf.keras.models.load_model('models/starter_swahili_news_classification_model.h5')
@@ -48,6 +51,3 @@ def classify_news(input_text):
     highest_prob = max(result_dict, key=result_dict.get)
 
     return (result_dict, highest_prob)
-
-
-classify_news('Mwanamke mmoja amefariki dunia na wengine wawili kujeruhiwa vibaya baada ya kushambuliwa na kundi la nyuki wakati wakivuna asali katika msitu wa Kiptunga, kaunti ya Taita Taveta.')
