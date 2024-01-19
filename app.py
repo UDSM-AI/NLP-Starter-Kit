@@ -28,7 +28,7 @@ def main():
 
 
             # Display the highest predicted category
-            st.success(f"Predicted category: {highest_prob}")
+            # st.success(f"Predicted category: {highest_prob}")
 
         else:
             st.warning("Please enter some text.")
