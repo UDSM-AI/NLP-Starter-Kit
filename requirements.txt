@@ -1,3 +1,5 @@
 streamlit
 tensorflow
 joblib
+sklearn
+streamlit
